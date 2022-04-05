@@ -1,0 +1,26 @@
+.collection {
+    display: inline-block;
+    width: 33%;
+}
+
+th, tr {
+    border: 1px solid black;
+  }
+
+.container {
+  display: flex;
+}
+
+.tableContainer {
+  border: 2px;
+  border-style: solid;
+  margin: 5px;
+}
+
+.total {
+  color:red;
+}
+
+.name {
+  color:red;
+}

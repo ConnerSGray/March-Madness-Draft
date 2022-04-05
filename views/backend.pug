@@ -1,0 +1,47 @@
+extends layout
+
+block layout-content
+    div.View
+        h1.Banner(style='text-align:center') Gray March Madness Backend
+        .collection
+            h3.Title TABLES
+            form(action="/table/create" method="post")
+                button(type="submit") Create Table
+                div.container
+                    each table, key in tableData
+                        div.tableContainer
+                            table
+                                tr
+                                    th Table
+                                    th Members
+                                tr
+                                    td #{table.name}
+                                    td
+                                        each member in table.members 
+                                            span.name #{member.name}
+                                            br
+                                            - var playerPoints = 0
+                                            each mem, key in memberData
+                                                if mem.name == member.name
+                                                    each play in mem.players
+                                                        span #{play.name}: #{play.points}
+                                                        - playerPoints = playerPoints + play.points
+                                                        br
+                                            span.total #{playerPoints}
+                                            br
+                                            form(id="addPlayer" action="/member/addplayer/" + member._id method="post")
+                                                input(type="text" name="playerId" list="playerList")
+                                                datalist(id="playerList")
+                                                    each team, key in teamData
+                                                        each player in team.players 
+                                                            option(value=player._id) #{player.name}
+                                                button(type="submit") &#43; 
+                                            br
+                                        form(id="addMember" action="/table/addmember/" + table._id method="post")
+                                            input(type="text" name="memberName")
+                                            button(type="submit") &#43;
+
+            
+
+
+            
